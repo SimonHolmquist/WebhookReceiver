@@ -15,9 +15,9 @@ app.MapPost("/github-webhook", async (HttpRequest request) =>
     var pusher = json.RootElement.GetProperty("pusher").GetProperty("name").GetString();
     var branch = json.RootElement.GetProperty("ref").GetString()?.Split('/').Last();
 
-    Console.WriteLine($"\n📦 Repositorio: {repo}");
-    Console.WriteLine($"👤 Push por: {pusher}");
-    Console.WriteLine($"🌿 Branch: {branch}");
+    Console.WriteLine($"\nRepositorio: {repo}");
+    Console.WriteLine($"Push por: {pusher}");
+    Console.WriteLine($"Branch: {branch}");
 
     var commits = json.RootElement.GetProperty("commits");
     foreach (var commit in commits.EnumerateArray())
@@ -26,9 +26,9 @@ app.MapPost("/github-webhook", async (HttpRequest request) =>
         var message = commit.GetProperty("message").GetString();
         var timestamp = commit.GetProperty("timestamp").GetString();
 
-        Console.WriteLine($"\n🔸 Commit: {id}");
-        Console.WriteLine($"🕒 Fecha: {timestamp}");
-        Console.WriteLine($"📝 Mensaje: {message}");
+        Console.WriteLine($"\nCommit: {id}");
+        Console.WriteLine($"Fecha: {timestamp}");
+        Console.WriteLine($"Mensaje: {message}");
     }
 
     return Results.Ok();
